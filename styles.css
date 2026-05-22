@@ -610,8 +610,14 @@ button, a, .filter-btn, .btn-simulate, .mobile-link, .cta-primary, .cta-secondar
 }
 
 .reveal-item {
-  opacity: 0;
-  transform: translateY(40px);
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.reveal-item:not(.animated) {
+  opacity: 1;
+  transform: none;
 }
 
 .cookie-banner {
