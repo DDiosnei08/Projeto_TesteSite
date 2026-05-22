@@ -3,6 +3,9 @@ import { renderReviews } from './reviews.js';
 import { initModals, openFinancingModal } from './modals.js';
 import { sanitizeText, validateTradeInForm } from './validation.js';
 
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches;
+
 function hideLoadingScreen() {
   const ls = document.getElementById('loadingScreen');
   if (ls) {
@@ -147,7 +150,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if (window.gsap && window.ScrollTrigger) {
+  const shouldAnimate = window.gsap && window.ScrollTrigger && !prefersReducedMotion && !isTouchDevice;
+
+  if (shouldAnimate) {
     gsap.registerPlugin(ScrollTrigger);
 
     gsap.from('.hero-anim', {
@@ -197,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('vehiclesRendered', () => {
-  if (window.gsap && window.ScrollTrigger) {
+  if (window.gsap && window.ScrollTrigger && !prefersReducedMotion && !isTouchDevice) {
     gsap.fromTo('.vehicle-card',
       { opacity: 0, y: 50, scale: 0.95 },
       {

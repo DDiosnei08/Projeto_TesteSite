@@ -1,5 +1,10 @@
 * { scroll-behavior: smooth; }
-body { font-family: 'Inter', sans-serif; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
+body { font-family: 'Inter', sans-serif; overflow-x: hidden; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+button, a, .filter-btn, .btn-simulate, .mobile-link, .cta-primary, .cta-secondary {
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
 .font-playfair { font-family: 'Playfair Display', serif; }
 
 .text-gold { color: #d4af37; }
@@ -303,8 +308,11 @@ body { font-family: 'Inter', sans-serif; overflow-x: hidden; -webkit-tap-highlig
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 1.5rem;
   overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   position: relative;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform, opacity;
 }
 .vehicle-card::before {
   content: '';
@@ -312,17 +320,20 @@ body { font-family: 'Inter', sans-serif; overflow-x: hidden; -webkit-tap-highlig
   inset: 0;
   background: linear-gradient(135deg, rgba(212,175,55,0.15) 0%, transparent 50%);
   opacity: 0;
-  transition: opacity 0.5s;
+  transition: opacity 0.3s ease;
   pointer-events: none;
 }
 .vehicle-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
   border-color: rgba(212, 175, 55, 0.3);
-  box-shadow: 0 30px 60px -15px rgba(212, 175, 55, 0.15), 0 0 0 1px rgba(212, 175, 55, 0.1);
+  box-shadow: 0 20px 40px -12px rgba(212, 175, 55, 0.14), 0 0 0 1px rgba(212, 175, 55, 0.1);
 }
 .vehicle-card:hover::before { opacity: 1; }
-.vehicle-card .v-img { transition: transform 0.7s ease; }
-.vehicle-card:hover .v-img { transform: scale(1.08); }
+.vehicle-card .v-img {
+  transition: transform 0.35s ease;
+  will-change: transform;
+}
+.vehicle-card:hover .v-img { transform: scale(1.04); }
 
 .feature-card {
   background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
@@ -555,19 +566,34 @@ body { font-family: 'Inter', sans-serif; overflow-x: hidden; -webkit-tap-highlig
   padding: 0.85rem;
   min-height: 44px;
   border-radius: 9999px;
-  background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(0,212,255,0.05));
-  border: 1px solid rgba(0,212,255,0.3);
+  background: rgba(0,212,255,0.08);
+  border: 1px solid rgba(0,212,255,0.25);
   color: #00d4ff;
   font-weight: 600;
   font-size: 0.9rem;
   margin-top: 0.5rem;
-  transition: all 0.3s;
+  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
   cursor: pointer;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 .btn-simulate:hover {
-  background: rgba(0,212,255,0.2);
-  border-color: #00d4ff;
-  box-shadow: 0 0 20px rgba(0,212,255,0.2);
+  background: rgba(0,212,255,0.16);
+  border-color: rgba(0,212,255,0.45);
+  box-shadow: 0 0 10px rgba(0,212,255,0.16);
+}
+
+@media (hover: none) {
+  .vehicle-card, .feature-card, .review-card, .btn-simulate, .filter-btn {
+    transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .vehicle-card:hover, .feature-card:hover, .review-card:hover, .btn-simulate:hover, .filter-btn:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .vehicle-card .v-img {
+    transform: none !important;
+  }
 }
 
 .reveal-item {
