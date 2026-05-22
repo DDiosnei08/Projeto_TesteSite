@@ -336,7 +336,7 @@ button, a, .filter-btn, .btn-simulate, .mobile-link, .cta-primary, .cta-secondar
 .vehicle-card:hover .v-img { transform: scale(1.04); }
 
 .feature-card {
-  background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 1.25rem;
   padding: 1.75rem;
@@ -348,7 +348,7 @@ button, a, .filter-btn, .btn-simulate, .mobile-link, .cta-primary, .cta-secondar
 .feature-card:hover {
   border-color: rgba(212, 175, 55, 0.3);
   transform: translateY(-4px);
-  background: linear-gradient(145deg, rgba(212,175,55,0.05), rgba(255,255,255,0.01));
+  background: rgba(255,255,255,0.06);
 }
 .feature-card h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.75rem; color: #fff; }
 .feature-card p { color: #9ca3af; line-height: 1.6; font-size: 0.9rem; }
