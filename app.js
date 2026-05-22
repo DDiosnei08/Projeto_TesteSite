@@ -35,10 +35,19 @@ function initCookieConsent() {
 
 function initPrivacyModal() {
   const modal = document.getElementById('privacyModal');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileMenuIcon = document.getElementById('mobileMenuIcon');
   if (!modal) return;
   document.querySelectorAll('[data-open-privacy]').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
+      if (mobileMenu && mobileMenu.classList.contains('open')) {
+        mobileMenu.classList.remove('open');
+        mobileMenu.classList.add('hidden');
+      }
+      if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      if (mobileMenuIcon) mobileMenuIcon.setAttribute('data-lucide', 'menu');
       modal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
       if (window.lucide) window.lucide.createIcons();
